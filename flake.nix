@@ -15,9 +15,46 @@
   outputs = { self, nixpkgs, flakebox, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        flakeboxLib = flakebox.lib.${system} { };
-      in
-      {
+        # Set project name
+        projectName = "RustStore";
+        flakeboxLib = flakebox.lib.${system} {
+          config = {
+            typos.pre-commit.enable = false;
+            #rootDir.path =./RustStore;
+          };
+        };
+
+        rustSrc = flakeboxLib.filterSubPaths {
+          root = builtins.path {
+            name = projectName;
+            path = ./.;
+          };
+          paths = [
+            "Cargo.toml"
+            "Cargo.lock"
+            ".cargo"
+            "src"
+          ];
+        };
+
+        outputs =
+          (flakeboxLib.craneMultiBuild { }) (craneLib':
+            let
+              craneLib = (craneLib'.overrideArgs {
+                pname = "flexbox-multibuild";
+                src = rustSrc;
+              });
+            in
+            rec {
+              workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
+              workspaceBuild = craneLib.buildWorkspace {
+                cargoArtifacts = workspaceDeps;
+              };
+              flakebox-tutorial = craneLib.buildPackage { };
+            });
+       in
+       {
+        legacyPackages = outputs;
         devShells = flakeboxLib.mkShells {
           packages = [ ];
         };
