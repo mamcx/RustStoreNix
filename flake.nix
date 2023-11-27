@@ -20,7 +20,7 @@
         flakeboxLib = flakebox.lib.${system} {
           config = {
             typos.pre-commit.enable = false;
-            #rootDir.path =./RustStore;
+            rootDir.path =./RustStore;
           };
         };
 
