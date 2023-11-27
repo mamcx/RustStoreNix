@@ -1,0 +1,18 @@
+[package]
+name = "syncdb"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+corelib = { path = "../corelib" }
+corelogic = { path = "../corelogic" }
+
+# Replace with workspace when this become the default sync
+clap = { version = "4.4.1",  features = ["derive"] }
+fs2.workspace = true
+tokio.workspace = true
+toml.workspace = true
+
+[dev-dependencies]
+serial_test = "2.0.0"

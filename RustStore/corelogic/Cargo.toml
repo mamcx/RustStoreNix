@@ -1,0 +1,30 @@
+[package]
+name = "corelogic"
+version = "0.4.0"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+edition = "2021"
+
+[dependencies]
+corelib = { path = "../corelib" }
+iron-age-ui= { path = "../../IronAge/ui" }
+iron-age-db= { path = "../../IronAge/db" }
+
+bcrypt.workspace = true
+comrak.workspace = true
+derivative.workspace = true
+derive_more.workspace = true
+heck.workspace = true
+num-traits.workspace = true
+serde.workspace = true
+strum.workspace = true
+totp-rs.workspace = true
+url.workspace = true
+tokio.workspace = true
+
+rust-embed.workspace = true
+
+[dev-dependencies]
+iron-age-db = { path = "../../IronAge/db" }
+
+tokio.workspace = true
+serial_test.workspace = true

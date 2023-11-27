@@ -1,0 +1,27 @@
+[package]
+name = "ui"
+version = "0.4.0"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# this is needed to build for iOS and Android.
+crate-type = ["staticlib", "cdylib"]
+
+# this dependency is only needed for Android.
+[target.'cfg(target_os = "android")'.dependencies]
+android_logger = "0.13.1"
+jni = { version = "0.21.1", default-features = false }
+
+[dependencies]
+corelib = { path = "../../corelib" }
+corelogic = { path = "../../corelogic" }
+iron-age-db = { path = "../../../IronAge/db" }
+iron-age-ui = { path = "../../../IronAge/ui" }
+
+indexmap.workspace = true
+log.workspace = true
+log-panics.workspace = true
+serde_json.workspace = true

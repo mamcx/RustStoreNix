@@ -1,0 +1,15 @@
+[package]
+name = "iron-age"
+version = "0.1.0"
+authors = ["Mario Montoya <mamcx@elmalabarista.com>"]
+description = "IronAge: A batteries-included data application framework like Django"
+edition = "2021"
+categories = ["database"]
+keywords = ["database", "sql", "mysql", "postgres", "sqlite", "orm"]
+
+[dependencies]
+iron-age-core = {path = "../corelib"}
+iron-age-db = {path = "../db"}
+iron-age-sync = {path = "../sync"}
+iron-age-ui = {path = "../ui"}
+iron-age-web = {path = "../web"}

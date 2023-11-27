@@ -1,0 +1,22 @@
+[package]
+name = "iron-age-web"
+version = "0.1.0"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+edition = "2021"
+
+[dependencies]
+derive_more.workspace = true
+http.workspace = true
+http-auth-basic.workspace = true
+rmp-serde.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_path_to_error.workspace = true
+tracing.workspace = true
+unicode-normalization.workspace = true
+ureq.workspace = true
+url.workspace = true
+
+[dev-dependencies]
+log = "0.4.19"
+env_logger = "0.10.0"

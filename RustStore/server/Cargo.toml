@@ -1,0 +1,24 @@
+[package]
+name = "server"
+version = "0.4.0"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+edition = "2021"
+
+[dependencies]
+corelib = { path = "../corelib" }
+corelogic = { path = "../corelogic" }
+
+# Solo para testear cloudinary
+#rustls = "0.20.2"
+anyhow = "*"
+actix-cors.workspace = true
+actix-files.workspace = true
+actix-http.workspace = true
+actix-identity.workspace = true
+actix-session.workspace = true
+actix-web.workspace = true
+futures.workspace = true
+percent-encoding.workspace = true
+serde.workspace = true
+tera.workspace = true
+tracing-actix-web.workspace = true

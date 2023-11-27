@@ -1,0 +1,27 @@
+[package]
+name = "corelib"
+version = "0.4.0"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+edition = "2021"
+
+[dependencies]
+iron-age-core = { path = "../../IronAge/corelib" }
+iron-age-db = { path = "../../IronAge/db" }
+iron-age-sync = { path = "../../IronAge/sync" }
+iron-age-web = { path = "../../IronAge/web" }
+iron-age-ui = { path = "../../IronAge/ui" }
+
+csv.workspace = true
+derivative.workspace = true
+directories.workspace = true
+dotenv.workspace = true
+fastrand.workspace = true
+indexmap.workspace = true
+itertools.workspace = true
+lazy_static.workspace = true
+rusty_ulid.workspace = true
+serde.workspace = true
+strum.workspace = true
+
+[target.'cfg(target_os = "windows")'.dependencies]
+ansi_term = "0.12.1"

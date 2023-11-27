@@ -1,0 +1,19 @@
+[package]
+name = "iron-age-ui"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+iron-age-core = {path = "../corelib"}
+iron-age-db = {path = "../db"}
+iron-age-sync = {path = "../sync"}
+
+derive_more.workspace = true
+flate2.workspace = true
+heck.workspace = true
+indexmap.workspace = true
+lazy_static.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+strum.workspace = true
+tera.workspace = true

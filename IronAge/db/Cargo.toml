@@ -1,0 +1,30 @@
+[package]
+name = "iron-age-db"
+version = "0.1.5"
+edition = "2021"
+
+[dependencies]
+iron-age-core = {path = "../corelib"}
+iron-age-sync = { path = "../sync" }
+
+async-stream.workspace = true
+async-trait.workspace = true
+crossbeam-channel.workspace = true
+deadpool.workspace = true
+deadpool-postgres.workspace = true
+decorum.workspace = true
+derive_more.workspace = true
+futures.workspace = true
+futures-core.workspace = true
+postgres-types.workspace = true
+rusqlite.workspace = true
+rust_decimal.workspace = true
+rusty_ulid.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+tokio-postgres.workspace = true
+
+[dev-dependencies]
+expect-test = "1.4.1"
+serial_test = "2.0.0"

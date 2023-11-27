@@ -1,0 +1,26 @@
+[package]
+name = "sync"
+version = "0.3.0"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+edition = "2021"
+
+[dependencies]
+corelib = { path = "../corelib" }
+corelogic = { path = "../corelogic" }
+
+better-panic.workspace = true
+clap.workspace = true
+encoding.workspace = true
+fs2.workspace = true
+glob.workspace = true
+quick-xml.workspace = true
+rusty_ulid.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+structopt.workspace = true
+tokio.workspace = true
+toml.workspace = true
+umya-spreadsheet.workspace = true
+
+[dev-dependencies]
+serial_test = "2.0.0"
