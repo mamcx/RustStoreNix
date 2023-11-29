@@ -20,41 +20,62 @@
         flakeboxLib = flakebox.lib.${system} {
           config = {
             typos.pre-commit.enable = false;
-            rootDir.path =./RustStore;
+            #rootDir.path =./RustStore;
           };
         };
 
-        rustSrc = flakeboxLib.filterSubPaths {
-          root = builtins.path {
-            name = projectName;
-            path = ./.;
-          };
-          paths = [
-            "Cargo.toml"
-            "Cargo.lock"
-            ".cargo"
-            "src"
-          ];
-        };
+        # # Add list of Rust-source paths
+        # buildPaths = [
+        #   "Cargo.toml"
+        #   "Cargo.lock"
+        #   ".cargo"
+        #   "client/ui"
+        #   "corelib"
+        #   "corelogic"
+        #   "server"
+        #   "sync"
+        #   "syncdb"
+        # ];        
 
-        outputs =
+        # # Filter Rust source code
+        # buildSrc = flakeboxLib.filterSubPaths {
+        #   root = builtins.path {
+        #     name = projectName;
+        #     path = ./.;
+        #   };
+        #   paths = buildPaths;
+        # };
+
+        # Add toolchain x profile build matrix
+        multiBuild =
           (flakeboxLib.craneMultiBuild { }) (craneLib':
             let
               craneLib = (craneLib'.overrideArgs {
-                pname = "flexbox-multibuild";
-                src = rustSrc;
+                pname = projectName;
+                #src = buildSrc;
               });
             in
-            rec {
-              workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
-              workspaceBuild = craneLib.buildWorkspace {
-                cargoArtifacts = workspaceDeps;
+            {
+              package = craneLib.buildPackage { 
+                 #src = flakeboxLib.cleanCargoSource (craneLib.path ./.);
+                 cargoLock = ./RustStore/Cargo.lock;
+                 cargoToml = ./RustStore/Cargo.toml;
+                 # Use a postUnpack hook to jump into our nested directory.
+                 postUnpack = ''
+                   cd $sourceRoot/RustStore
+                   sourceRoot="."
+                 '';
               };
-              flakebox-tutorial = craneLib.buildPackage { };
             });
-       in
-       {
-        legacyPackages = outputs;
+
+        # Expose external output packages
+        packages.default = multiBuild.package;
+
+        # Expose internal (CI) packages
+        legacyPackages = multiBuild;
+
+      in
+      {
         devShells = flakeboxLib.mkShells {
           packages = [ ];
         };
