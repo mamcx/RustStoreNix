@@ -1,4 +1,3 @@
-#!/nix/store/np50phgdc2ls0g9k5f7zqznwszd8dr4h-bash-5.2-p15/bin/bash
 #!/usr/bin/env bash
 
 set -euo pipefail
@@ -24,7 +23,7 @@ fi
 export FLAKEBOX_GIT_LS
 FLAKEBOX_GIT_LS="$(git ls-files)"
 export FLAKEBOX_GIT_LS_TEXT
-FLAKEBOX_GIT_LS_TEXT="$(echo "$FLAKEBOX_GIT_LS" | grep -v -E "^db/|\.(png|ods|jpg|jpeg|woff2|keystore|wasm|ttf|jar|ico)\$")"
+FLAKEBOX_GIT_LS_TEXT="$(echo "$FLAKEBOX_GIT_LS" | grep -v -E "\.(png|ods|jpg|jpeg|woff2|keystore|wasm|ttf|jar|ico|gif)\$")"
 
 
 function check_nothing() {
@@ -35,7 +34,7 @@ export -f check_nothing
 function check_cargo_fmt() {
     set -euo pipefail
 
-    cargo fmt --all --check
+    flakebox-in-each-cargo-workspace cargo fmt --all --check
 
 }
 export -f check_cargo_fmt
@@ -44,7 +43,7 @@ function check_cargo_lock() {
     set -euo pipefail
 
     # https://users.rust-lang.org/t/check-if-the-cargo-lock-is-up-to-date-without-building-anything/91048/5
-    cargo update --workspace --locked
+    flakebox-in-each-cargo-workspace cargo update --workspace --locked
 
 }
 export -f check_cargo_lock
@@ -53,7 +52,7 @@ function check_leftover_dbg() {
     set -euo pipefail
 
     errors=""
-    for path in $(echo "$FLAKEBOX_GIT_LS_TEXT" | grep  '.*\.rs'); do
+    for path in $(echo "$FLAKEBOX_GIT_LS_TEXT" | grep '.*\.rs'); do
       if grep 'dbg!(' "$path" > /dev/null; then
         >&2 echo "$path contains dbg! macro"
         errors="true"
@@ -88,7 +87,7 @@ function check_semgrep() {
     fi
 
     env SEMGREP_ENABLE_VERSION_CHECK=0 \
-      semgrep -q --error --config .config/semgrep.yaml
+      semgrep -q --error --no-rewrite-rule-ids --config .config/semgrep.yaml
 
 }
 export -f check_semgrep
@@ -102,33 +101,6 @@ function check_shellcheck() {
 
 }
 export -f check_shellcheck
-
-function check_trailing_newline() {
-    set -euo pipefail
-
-    errors=""
-    for path in $(echo "$FLAKEBOX_GIT_LS_TEXT"); do
-
-      # extra branches for clarity
-      if [ ! -s "$path" ]; then
-         # echo "$path is empty"
-         true
-      elif [ -z "$(tail -c 1 < "$path")" ]; then
-         # echo "$path ends with a newline or with a null byte"
-         true
-      else
-        >&2 echo "$path doesn't end with a newline" 1>&2
-        errors="true"
-      fi
-    done
-
-    if [ -n "$errors" ]; then
-      >&2 echo "Fix the problems above or use --no-verify" 1>&2
-      return 1
-    fi
-
-}
-export -f check_trailing_newline
 
 function check_trailing_whitespace() {
     set -euo pipefail
@@ -149,6 +121,5 @@ parallel \
     check_leftover_dbg \
     check_semgrep \
     check_shellcheck \
-    check_trailing_newline \
     check_trailing_whitespace \
   check_nothing

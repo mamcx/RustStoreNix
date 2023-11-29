@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
     flakebox = {
-      url = "github:rustshop/flakebox?rev=00baca64cf47f00dceb6782bcbbc37307fdb51fd";
+      url = "github:rustshop/flakebox";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -17,7 +17,8 @@
 
         flakeboxLib = flakebox.lib.${system} {
           config = {
-            github.ci.buildOutputs = [ ".#ci.RustStore" ];
+            git.pre-commit.trailing_newline = false;
+            github.ci.buildOutputs = [ ".#ci.${projectName}" ];
             typos.pre-commit.enable = false;
           };
         };
@@ -47,20 +48,20 @@
           (flakeboxLib.craneMultiBuild { }) (craneLib':
             let
               craneLib = (craneLib'.overrideArgs {
-                pname = "flexbox-multibuild";
+                pname = projectName;
                 src = buildSrc;
               });
             in
             rec {
-               workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
-               workspaceBuild = craneLib.buildWorkspace {
-                cargoArtifacts = workspaceDeps;
-              };
-              ruststore = craneLib.buildPackage { };
+              #  workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
+              #  workspaceBuild = craneLib.buildWorkspace {
+              #   cargoArtifacts = workspaceDeps;
+              # };
+              ${projectName} = craneLib.buildPackage { };
             });
       in
       {
-        packages.default = multiBuild.ruststore;
+        packages.default = multiBuild.${projectName};
 
         legacyPackages = multiBuild;
 
