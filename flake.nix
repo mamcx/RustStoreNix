@@ -18,7 +18,7 @@
         flakeboxLib = flakebox.lib.${system} {
           config = {
             git.pre-commit.trailing_newline = false;
-            github.ci.buildOutputs = [ ".#ci.${projectName}" ];
+            #github.ci.buildOutputs = [ ".#ci.${projectName}" ];
             typos.pre-commit.enable = false;
           };
         };
@@ -53,10 +53,10 @@
               });
             in
             rec {
-              #  workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
-              #  workspaceBuild = craneLib.buildWorkspace {
-              #   cargoArtifacts = workspaceDeps;
-              # };
+               workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
+               workspaceBuild = craneLib.buildWorkspace {
+                cargoArtifacts = workspaceDeps;
+              };
               ${projectName} = craneLib.buildPackage { };
             });
       in
