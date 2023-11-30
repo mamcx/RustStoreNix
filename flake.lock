@@ -157,19 +157,21 @@
         "nixpkgs": [
           "nixpkgs"
         ],
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1701147855,
-        "narHash": "sha256-rjgMBJxfswyR9wDKaEK0P/uDxiU8Oyp9USqoT+HTlD4=",
+        "lastModified": 1699681206,
+        "narHash": "sha256-vg/aDhDPV8QUi2rE3O5C/FgSaxOPZRsuRNvto5aY/JM=",
         "owner": "rustshop",
         "repo": "flakebox",
-        "rev": "7bbcce36af2b83d0d27eae7933a3471f1f0177a1",
+        "rev": "390c23bc911b354f16db4d925dbe9b1f795308ed",
         "type": "github"
       },
       "original": {
         "owner": "rustshop",
         "repo": "flakebox",
+        "rev": "390c23bc911b354f16db4d925dbe9b1f795308ed",
         "type": "github"
       }
     },
@@ -185,6 +187,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-23.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1701068326,
+        "narHash": "sha256-vmMceA+q6hG1yrjb+MP8T0YFDQIrW3bl45e7z24IEts=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8cfef6986adfb599ba379ae53c9f5631ecd2fd9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }

@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
     flakebox = {
-      url = "github:rustshop/flakebox";
+      url = "github:rustshop/flakebox?rev=390c23bc911b354f16db4d925dbe9b1f795308ed";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -18,7 +18,6 @@
         flakeboxLib = flakebox.lib.${system} {
           config = {
             git.pre-commit.trailing_newline = false;
-            #github.ci.buildOutputs = [ ".#ci.${projectName}" ];
             typos.pre-commit.enable = false;
           };
         };
