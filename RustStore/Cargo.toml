@@ -28,6 +28,12 @@ incremental = false
 [profile.release]
 strip = true
 
+[workspace.metadata]
+name = "RustStore"
+version = "0.4.0"
+authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
+edition = "2021"
+
 [workspace.dependencies]
 actix-cors = "0.6.4"
 actix-files = "0.6.2"

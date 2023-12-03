@@ -6,7 +6,7 @@ target/
 **/*.rs.bk
 local.properties
 Cargo.lock
-
+result
 #Others
 .DS_Store
 *.log
