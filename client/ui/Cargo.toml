@@ -18,8 +18,8 @@ jni = { version = "0.21.1", default-features = false }
 [dependencies]
 corelib = { path = "../../corelib" }
 corelogic = { path = "../../corelogic" }
-iron-age-db = { path = "../../../IronAge/db" }
-iron-age-ui = { path = "../../../IronAge/ui" }
+# iron-age-db = { path = "../../../IronAge/db" }
+# iron-age-ui = { path = "../../../IronAge/ui" }
 
 indexmap.workspace = true
 log.workspace = true

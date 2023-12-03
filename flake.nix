@@ -28,6 +28,13 @@
           "Cargo.lock"
           ".cargo"
 
+          "IronAge"
+          "IronAge/corelib"
+          "IronAge/db"
+          "IronAge/sync"
+          "IronAge/ui"
+          "IronAge/web"
+
           "client/ui"
           "corelib"
           "corelogic"
@@ -57,7 +64,16 @@
                workspaceBuild = craneLib.buildWorkspace {
                 cargoArtifacts = workspaceDeps;
               };
-              ${projectName} = craneLib.buildPackage { };
+              ${projectName} = craneLib.buildPackage {
+                 src = craneLib.cleanCargoSource (craneLib.path ./.);
+                 cargoLock = ./Cargo.lock;
+                 cargoToml = ./Cargo.toml;
+                 # # Use a postUnpack hook to jump into our nested directory.
+                 # postUnpack = ''
+                 #   cd $sourceRoot/RustStore
+                 #   sourceRoot="."
+                 # '';
+               };
             });
       in
       {

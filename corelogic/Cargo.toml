@@ -6,8 +6,8 @@ edition = "2021"
 
 [dependencies]
 corelib = { path = "../corelib" }
-iron-age-ui= { path = "../../IronAge/ui" }
-iron-age-db= { path = "../../IronAge/db" }
+# iron-age-ui= { path = "../../IronAge/ui" }
+# iron-age-db= { path = "../../IronAge/db" }
 
 bcrypt.workspace = true
 comrak.workspace = true
@@ -24,7 +24,7 @@ tokio.workspace = true
 rust-embed.workspace = true
 
 [dev-dependencies]
-iron-age-db = { path = "../../IronAge/db" }
+# iron-age-db = { path = "../../IronAge/db" }
 
 tokio.workspace = true
 serial_test.workspace = true
