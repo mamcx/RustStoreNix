@@ -11,9 +11,7 @@ jobs:
     - name: Magic Nix Cache
       uses: DeterminateSystems/magic-nix-cache-action@v2
     - name: Build on ${{ matrix.host }}
-      run: 'nix flake check -L .#
-
-        '
+      run: nix build .#ci.RustStore
     strategy:
       matrix:
         host:

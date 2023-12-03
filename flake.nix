@@ -18,6 +18,7 @@
         flakeboxLib = flakebox.lib.${system} {
           config = {
             git.pre-commit.trailing_newline = false;
+            github.ci.buildOutputs = [ ".#ci.RustStore" ];
             typos.pre-commit.enable = false;
           };
         };

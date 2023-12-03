@@ -9,6 +9,16 @@ members = [
     "client/ui",
 ]
 
+[workspace.package]
+version = "0.0.1"
+authors = ["Dawid Ciężarkiewicz <dpc@dpc.pw>"]
+edition = "2021"
+description = "Rust dev experience (DX) we can share and love."
+documentation = "https://github.com/rustshop/flakebox"
+readme = "README.md"
+repository = "https://github.com/rustshop/flakebox"
+license = "MPL-2.0"
+keywords = ["nix", "tool", "dx"]
 
 [profile.dev]
 opt-level = 0
@@ -79,4 +89,6 @@ url = "2.4.0"
 [profile.dev.build-override]
 debug = false
 [profile.ci.build-override]
+debug = false
+[profile.release.build-override]
 debug = false
