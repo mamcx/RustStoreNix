@@ -5,7 +5,7 @@ authors = ["Mario Alejandro Montoya <mamcx@elmalabarista.com>"]
 edition = "2021"
 
 [dependencies]
-iron-age-core = { path = "../../IronAge/corelib" }
+# iron-age-core = { path = "../../IronAge/corelib" }
 # iron-age-db = { path = "../../IronAge/db" }
 # iron-age-sync = { path = "../../IronAge/sync" }
 # iron-age-web = { path = "../../IronAge/web" }
