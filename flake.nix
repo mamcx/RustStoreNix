@@ -18,8 +18,11 @@
         flakeboxLib = flakebox.lib.${system} {
           config = {
             git.pre-commit.trailing_newline = false;
+              git.pre-commit.trailing_whitespace = false;
             github.ci.buildOutputs = [ ".#ci.RustStore" ];
             typos.pre-commit.enable = false;
+            convco.enable = false;
+            semgrep.enable = false;
           };
         };
 
@@ -60,20 +63,20 @@
               });
             in
             rec {
-               workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
-               workspaceBuild = craneLib.buildWorkspace {
+              workspaceDeps = craneLib.buildWorkspaceDepsOnly { };
+              workspaceBuild = craneLib.buildWorkspace {
                 cargoArtifacts = workspaceDeps;
               };
               ${projectName} = craneLib.buildPackage {
-                 src = craneLib.cleanCargoSource (craneLib.path ./.);
-                 cargoLock = ./Cargo.lock;
-                 cargoToml = ./Cargo.toml;
-                 # # Use a postUnpack hook to jump into our nested directory.
-                 # postUnpack = ''
-                 #   cd $sourceRoot/RustStore
-                 #   sourceRoot="."
-                 # '';
-               };
+                src = craneLib.cleanCargoSource (craneLib.path ./.);
+                cargoLock = ./Cargo.lock;
+                cargoToml = ./Cargo.toml;
+                # # Use a postUnpack hook to jump into our nested directory.
+                # postUnpack = ''
+                #   cd $sourceRoot/RustStore
+                #   sourceRoot="."
+                # '';
+              };
             });
       in
       {
@@ -81,10 +84,8 @@
 
         legacyPackages = multiBuild;
 
-        devShells = {
-          default = flakeboxLib.mkDevShell {
-            packages = [ ];
-          };
+        devShells = flakeboxLib.mkShells {
+          packages = [ ];
         };
       }
     );

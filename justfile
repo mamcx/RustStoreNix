@@ -88,12 +88,6 @@ clippy-fix:
   cargo clippy --locked --offline --workspace --all-targets --fix
 
 
-# run `semgrep`
-semgrep:
-  env SEMGREP_ENABLE_VERSION_CHECK=0 \
-    semgrep --error --no-rewrite-rule-ids --config .config/semgrep.yaml
-
-
 # check typos
 [no-exit-message]
 typos *PARAMS:
